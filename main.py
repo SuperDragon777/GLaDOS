@@ -1,8 +1,13 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import subprocess
+import sys
 
+import subrunner
 import hw
+import limiter
 hw.write()
+subrunner.run("limiter.py")
 
 debug_esc_close = True
 glados_img_path = "img/glados.png"
@@ -38,7 +43,12 @@ label = tk.Label(
     )
 label.pack()
 
+def stop_all():
+    subrunner.stop_all()
+    root.destroy()
+    sys.exit(0)
+
 if debug_esc_close:
-    root.bind("<Escape>", lambda e: root.destroy())
+    root.bind("<Escape>", lambda e: stop_all())
 
 root.mainloop()
